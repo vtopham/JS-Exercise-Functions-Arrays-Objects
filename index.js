@@ -204,8 +204,24 @@ function getCarInfoById(inventory, id) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * sortCarInventory returns an inventory that is sorted by car_model, ascending [A-Z].
 */
-function sortCarInventory(/* code here */) {
-  /* code here */
+function sortCarInventory(inventory) {
+  
+  const sortByModel = function(inventory) {
+    return inventory.sort(function(a,b) {
+      const current = a.car_model;
+      const compare = b.car_model;
+
+      if (current < compare) {
+        return -1;
+      } else if (current > compare) {
+          return 1;
+      } else {
+        return 0;
+      }
+      }
+  );
+  }
+  return sortByModel(inventory);
 }
 
 /**
@@ -217,7 +233,16 @@ function sortCarInventory(/* code here */) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * getModelYears returns an array containing all the 'car_year's in the inventory.
 */
-function getModelYears(/* code here */) {
+function getModelYears(inventory) {
+    const getYears = function(inventory) {
+      const newArray = [];
+      for (var i = 0; i < inventory.length; i++) {
+        newArray.push(inventory[i].car_year);
+      }
+      return newArray;
+    }
+
+    return getYears(inventory);
   /* code here */
 }
 
@@ -233,8 +258,17 @@ function getModelYears(/* code here */) {
  * with a `car_year` which is at most the given desired max year,
  * in the same order as they appear in the original inventory.
 */
-function getOlderCars(/* code here */) {
-  /* code here */
+function getOlderCars(inventory, maxYear) {
+  const findByYear = function(inventory, maxYear) {
+    const newList = [];
+    for (var i = 0; i < inventory.length; i++) {
+      if (inventory[i].car_year <= maxYear) {
+        newList.push(inventory[i]);
+      }
+    }
+    return newList;
+  }
+  return findByYear(inventory, maxYear);
 }
 
 /**
